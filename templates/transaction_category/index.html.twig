@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TransactionCategory index{% endblock %}
+
+{% block body %}
+    <h1>TransactionCategory index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Uuid</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for transaction_category in transaction_categories %}
+            <tr>
+                <td>{{ transaction_category.id }}</td>
+                <td>{{ transaction_category.uuid }}</td>
+                <td>{{ transaction_category.name }}</td>
+                <td>{{ transaction_category.description }}</td>
+                <td>{{ transaction_category.createdAt ? transaction_category.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ transaction_category.updatedAt ? transaction_category.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_transaction_category_show', {'id': transaction_category.id}) }}">show</a>
+                    <a href="{{ path('app_transaction_category_edit', {'id': transaction_category.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_transaction_category_new') }}">Create new</a>
+{% endblock %}

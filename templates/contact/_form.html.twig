@@ -1,0 +1,97 @@
+{{ form_start(form) }}
+<div class="row">
+    <div class="col-md-8">
+        <div class="row mb-3">
+            <div class="col-md-2 align-self-center"><label class="required">Contact Type</label> </div>
+            <div class="col-md-10 align-self-center">{{ form_widget(form.type) }}</div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-md-2 align-self-center">Primary Contact</div>
+            <div class="col-md-10 d-flex">
+                <div class="row mx-0 w-100">
+                    <div class="col-md-3 pl-lg-0">{{ form_widget(form.principalSalutation) }}</div>
+                    <div class="col-md-4 pl-lg-0">{{ form_widget(form.principalFirstName) }}</div>
+                    <div class="col-md-5 px-lg-0">{{ form_widget(form.principalLastName) }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-md-2 align-self-center">{{ form_label(form.companyName) }}</div>
+            <div class="col-md-10">{{ form_widget(form.companyName) }}</div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-md-2 align-self-center">
+                <label class="required" for="contact_displayName">Display Name</label>
+            </div>
+            <div class="col-md-10">
+                <select id="contact_displayName" name="contact_displayName" required="true" class="form-control form-control-sm mb-2 contact-displayname form-picker displayname-form-picker">
+                    <option value="{{ contact.displayName }}">{{ contact.displayName }}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-md-2 align-self-center">Email Address</div>
+            <div class="col-md-10">{{ form_widget(form.emailAddress) }}</div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-md-2 align-self-center">Phone</div>
+            <div class="col-md-10 d-flex">
+                <div class="row mx-0 w-100">
+                    <div class="col-md-6 px-lg-0">
+                        <div class="form-group mb-0">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+            <span class="input-group-text">
+                <i class="fas fa-phone"></i> <!-- Ícono de teléfono -->
+            </span>
+                                </div>
+                                {{ form_widget(form.workPhoneNumber) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 pr-lg-0">
+                        <div class="form-group mb-0">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+            <span class="input-group-text">
+                <i class="fas fa-mobile-alt"></i> <!-- Ícono de móvil -->
+            </span>
+                                </div>
+                                {{ form_widget(form.mobilePhoneNumber) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr class="sidebar-divider mb-4">
+{% set label = ['Billing' , 'Shipping'] %}
+{% for address in form.contactAddresses %}
+    <!-- Row -->
+    <div class="row" id="{{ label[loop.index0] }}-address">
+        <div class="col-md-8">
+            <div class="row mb-2">
+                <div class="col-md-2">{{ label[loop.index0] | capitalize }} Address</div>
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-md-12">{{ form_widget(address.attention) }}</div>
+                        <div class="col-md-6">{{ form_widget(address.line1) }}</div>
+                        <div class="col-md-6 pl-lg-0">{{ form_widget(address.line2) }}</div>
+                        <div class="col-md-3">{{ form_widget(address.city) }}</div>
+                        <div class="col-md-3 pl-lg-0">{{ form_widget(address.state) }}</div>
+                        <div class="col-md-3 pl-lg-0">{{ form_widget(address.zipCode) }}</div>
+                        <div class="col-md-3 pl-lg-0">{{ form_widget(address.country) }}</div>
+                        <div class="col-md-6">{{ form_widget(address.phone) }}</div>
+                        <div class="col-md-6 pl-lg-0">{{ form_widget(address.fax) }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endfor %}
+<hr class="sidebar-divider">
+<button class="btn btn-sm btn-primary card-link">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

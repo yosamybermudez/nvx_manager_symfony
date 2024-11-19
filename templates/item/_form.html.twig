@@ -1,0 +1,57 @@
+{{ form_start(form) }}
+<div class="row">
+    <div class="col-md-8">
+        <!-- Row -->
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <div class="row mb-2">
+                    <div class="col-md-3 align-self-center">{{ form_label(form.type) }}</div>
+                    <div class="col-md-9">{{ form_widget(form.type) }}</div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <div class="row mb-2">
+                    <div class="col-md-3 align-self-center">{{ form_label(form.name) }}</div>
+                    <div class="col-md-9">{{ form_widget(form.name) }}</div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row mb-2">
+                    <div class="col-md-3 align-self-center">{{ form_label(form.service) }}</div>
+                    <div class="col-md-9">{{ form_widget(form.service) }}</div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <div class="row mb-2">
+                    <div class="col-md-3 align-self-center">{{ form_label(form.regularPrice) }}</div>
+                    <div class="col-md-9">{{ form_widget(form.regularPrice) }}</div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row mb-2">
+                    <div class="col-md-3 align-self-center">{{ form_label(form.unit) }}</div>
+                    <div class="col-md-9">{{ form_widget(form.unit) }}</div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <div class="row mb-2">
+                    <div class="col-md-3 align-self-center">{{ form_label(form.description) }}</div>
+                    <div class="col-md-9">{{ form_widget(form.description) }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr class="sidebar-divider">
+<button class="btn btn-sm btn-primary card-link">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
+

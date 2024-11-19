@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Add New Contact{% endblock %}
+
+{% block body %}
+    <!-- Page Header -->
+    <div class="d-flex justify-content-between bg-white border-bottom border-1 p-3">
+        <h5 class="align-self-center mb-0">New Contact</h5>
+        <div>
+            <a class="btn btn-sm btn-secondary" href="{{ path('app_contact_index') }}">Back To List</a>
+        </div>
+    </div>
+    <!-- Page Content -->
+    <div class="p-3">
+        {{ include('contact/_form.html.twig') }}
+    </div>
+{% endblock %}

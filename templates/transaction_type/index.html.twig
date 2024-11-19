@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TransactionType index{% endblock %}
+
+{% block body %}
+    <h1>TransactionType index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Uuid</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for transaction_type in transaction_types %}
+            <tr>
+                <td>{{ transaction_type.id }}</td>
+                <td>{{ transaction_type.uuid }}</td>
+                <td>{{ transaction_type.name }}</td>
+                <td>{{ transaction_type.description }}</td>
+                <td>{{ transaction_type.createdAt ? transaction_type.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ transaction_type.updatedAt ? transaction_type.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_transaction_type_show', {'id': transaction_type.id}) }}">show</a>
+                    <a href="{{ path('app_transaction_type_edit', {'id': transaction_type.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_transaction_type_new') }}">Create new</a>
+{% endblock %}

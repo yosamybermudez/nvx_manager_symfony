@@ -1,0 +1,46 @@
+<table class="table table-sm data-table">
+    <thead>
+    <tr>
+        <th>Date</th>
+        <th>Document No.</th>
+        <th>Reference No.</th>
+        <th>Customer</th>
+        <th>Amount</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for quote in quotes %}
+        <tr>
+            <td>{{ quote.documentDate | date('d M Y') }}</td>
+            <td class="text-nowrap"><a href="{{ path('app_quote_show', {'uuid': quote.uuid}) }}">{{ quote.documentNumber }}</a></td>
+            <td>{{ quote.referenceNumber }}</td>
+            <td><a href="{{ path('app_contact_show', {'uuid' : quote.customer.uuid}) }}">{{ quote.customer.displayName }}</a></td>
+            <td>{{ quote.amount | number_format(2,'.') }}</td>
+            <td>
+                <span class="badge badge-warning">Pending Approval</span>
+            </td>
+            <td class="text-center">
+                <a class="btn btn-sm btn-link text-gray-500" id="actionsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-ellipsis-v"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right animated--fade-in shadow" aria-labelledby="actionsDropdown">
+                    <a class="dropdown-item" href="{{ path('app_quote_edit', {'uuid' : quote.uuid}) }}">
+                        <i class="fas fa-pen fa-sm fa-fw mr-2 text-gray-500"></i>
+                        Edit
+                    </a>
+                    <a class="dropdown-item text-danger delete-item" href="#" data-action="{{ path('app_quote_delete', {'uuid' : quote.uuid}) }}" data-token="{{ csrf_token('delete' ~ quote.uuid) }}" data-toggle="modal" data-target="#deleteModal">
+                        <i class="fas fa-trash fa-sm fa-fw mr-2"></i>
+                        Delete
+                    </a>
+                </div>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="3">No Records Found</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

@@ -1,0 +1,26 @@
+<table class="table table-sm table-striped data-table-transactions">
+    <thead>
+    <tr>
+        <th>TransactionDate</th>
+        <th>Amount</th>
+        <th>Account / Balance After</th>
+        <th>Notes</th>
+        <th>actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for payment in payments %}
+        <tr>
+            <td>{{ payment.transactionDate ? payment.transactionDate|date('d M y h:i:s a') : '' }}</td>
+            <td>$ {{ payment.amount | number_format(2,'.') }}</td>
+            <td><a href="{{ path('app_contable_account_show', {'uuid' : payment.journalEntry.contableAccount.uuid}) }}">{{ payment.journalEntry.contableAccount.name }}</a> / $ {{ payment.journalEntry.balance | number_format(2,',')}}</td>
+            <td>{{ payment.notes }}</td>
+            <td></td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="4">no records found</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit ContableAccount{% endblock %}
+
+{% block body %}
+    <h1>Edit ContableAccount</h1>
+
+    {{ include('contable_account/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_contable_account_index') }}">back to list</a>
+
+    {{ include('contable_account/_delete_form.html.twig') }}
+{% endblock %}

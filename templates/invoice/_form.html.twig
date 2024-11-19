@@ -1,0 +1,116 @@
+{{ form_start(form) }}
+<!-- Row -->
+<div class="row">
+    <div class="col-md-6">
+        <div class="row mb-2">
+            <div class="col-md-3 align-self-center">{{ form_label(form.customer) }}</div>
+            <div class="col-md-9">{{ form_widget(form.customer) }}</div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="row mb-2">
+            <div class="col-md-3 align-self-center">{{ form_label(form.salesPerson) }}</div>
+            <div class="col-md-9">{{ form_widget(form.salesPerson) }}</div>
+        </div>
+    </div>
+</div>
+<!-- Row -->
+<div class="row">
+    <div class="col-md-6">
+        <div class="row mb-2">
+            <div class="col-md-3 align-self-center">{{ form_label(form.documentNumber) }}</div>
+            <div class="col-md-9">{{ form_widget(form.documentNumber) }}</div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="row mb-2">
+            <div class="col-md-3 align-self-center">{{ form_label(form.referenceNumber) }}</div>
+            <div class="col-md-9">{{ form_widget(form.referenceNumber) }}</div>
+        </div>
+    </div>
+</div>
+<!-- Row -->
+<div class="row">
+    <div class="col-md-6">
+        <div class="row mb-2">
+            <div class="col-md-3 align-self-center">{{ form_label(form.documentDate) }}</div>
+            <div class="col-md-9">{{ form_widget(form.documentDate) }}</div>
+        </div>
+    </div>
+</div>
+<!-- Row -->
+<div class="row">
+    <div class="col-md-6">
+        <div class="row mb-2">
+            <div class="col-md-3 align-self-center">{{ form_label(form.paymentMethod) }}</div>
+            <div class="col-md-9">{{ form_widget(form.paymentMethod) }}</div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="row mb-2">
+            <div class="col-md-3 align-self-center">{{ form_label(form.paymentAccount) }}</div>
+            <div class="col-md-9">{{ form_widget(form.paymentAccount) }}</div>
+        </div>
+    </div>
+</div>
+<!-- Row -->
+<div class="row">
+    <div class="col-md-6">
+        <div class="row mb-2">
+            <div class="col-md-3 align-self-center">{{ form_label(form.notes) }}</div>
+            <div class="col-md-9">{{ form_widget(form.notes) }}</div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="row mb-2">
+            <div class="col-md-3 align-self-center">{{ form_label(form.invoiceStatus) }}</div>
+            <div class="col-md-9">{{ form_widget(form.invoiceStatus) }}</div>
+        </div>
+    </div>
+</div>
+<hr class="sidebar-divider">
+<div class="mb-2">
+    <div class="d-flex justify-content-between border-bottom pb-2 my-3">
+        <h5 class="mb-0 align-self-center">Items</h5>
+    </div>
+    <table id="add-table" class="table table-sm table-borderless">
+        <thead>
+        <tr>
+            <th class="col-4">Item Details</th>
+            <th class="col-3">Notes</th>
+            <th>Quantity</th>
+            <th>Rate</th>
+            <th>Amount</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody data-prototype="<td>{{ form_widget(form.invoiceItems.vars.prototype.item)|e }}</td><td>{{ form_widget(form.invoiceItems.vars.prototype.notes)|e }}</td><td>{{ form_widget(form.invoiceItems.vars.prototype.quantity)|e }}</td> <td>{{ form_widget(form.invoiceItems.vars.prototype.rate)|e }}</td> <td>{{ form_widget(form.invoiceItems.vars.prototype.amount)|e }}<input type='text' class='form-control form-control-sm text-right ii-amount-disabled' disabled='disabled'></td> <td> <button type='button' class='btn btn-danger btn-sm remove-item'>Remove</button> </td>">
+        {% for invoiceItem in form.invoiceItems %}
+            <tr>
+                <td>{{ form_widget(invoiceItem.item) }}</td>
+                <td>{{ form_widget(invoiceItem.notes) }}</td>
+                <td>{{ form_widget(invoiceItem.quantity) }}</td>
+                <td>{{ form_widget(invoiceItem.rate) }}</td>
+                <td>
+                    {{ form_widget(invoiceItem.amount) }}
+                    <input type="text" class="form-control form-control-sm text-right ii-amount-disabled" disabled="disabled">
+                </td>
+                <td> <button type="button" class="btn btn-danger btn-sm remove-item">Remove</button> </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="2" class="text-right">
+                <button type="button" class="btn btn-sm btn-primary add-item">Add Item</button>
+            </td>
+            <td></td>
+            <td class="font-weight-bold text-right text-uppercase">Total</td>
+            <td class="text-right">$ <span class="ii-total-amount">0.00</span> </td>
+        </tr>
+        </tfoot>
+    </table>
+</div>
+<hr class="sidebar-divider">
+<button class="btn btn-sm btn-primary card-link">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

@@ -1,0 +1,8 @@
+<turbo-stream action="replace" target="invoice-status-{{ invoice.uuid }}">
+    <template>
+        <td id="invoice-status-{{ invoice.uuid }}">
+            {% set status = 'Paid' %}
+            <span class="badge text-uppercase badge-{% if status == 'Paid' %}success{% else %}danger{% endif %}">{{ status }}</span>
+        </td>
+    </template>
+</turbo-stream>

@@ -1,0 +1,37 @@
+<table class="table table-sm data-table-transactions">
+    <thead>
+    <tr>
+        <th>Entry Date</th>
+        <th>Description</th>
+        <th>Currency</th>
+        <th>Debit</th>
+        <th>Credit</th>
+        <th>Balance</th>
+        <th>Contable Account</th>
+        <th>Payment Method</th>
+        <th>actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for journal_entry in journal_entries %}
+        <tr>
+            <td>{{ journal_entry.entryDate ? journal_entry.entryDate|date('d M y h:i:s a') : '' }}</td>
+            <td>{{ journal_entry.description }}</td>
+            <td>{{ journal_entry.currency }}</td>
+            <td class="text-right">{{ journal_entry.debit ? journal_entry.debit | number_format(2,'.') : '' }}</td>
+            <td class="text-right">{{ journal_entry.credit ? journal_entry.credit | number_format(2,'.') : '' }}</td>
+            <td class="text-right">$ {{ journal_entry.balance | number_format(2,'.') }}</td>
+            <td><a href="{{ path('app_contable_account_show', {'uuid' : journal_entry.contableAccount.uuid}) }}">{{ journal_entry.contableAccount.name }}</a></td>
+            <td>{{ journal_entry.paymentMethod }}</td>
+            <td>
+                <a href="{{ path('app_journal_entry_show', {'id': journal_entry.id}) }}">show</a>
+                <a href="{{ path('app_journal_entry_edit', {'id': journal_entry.id}) }}">edit</a>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="12">no records found</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

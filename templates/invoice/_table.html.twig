@@ -1,0 +1,66 @@
+<table class="table table-sm table-striped data-table-invoice-quote">
+    <thead>
+    <tr>
+        <th>Date</th>
+        <th>Document No.</th>
+        <th>Reference No.</th>
+        <th>Customer</th>
+        <th>Amount</th>
+        <th>Pending Amount</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for invoice in invoices %}
+        <tr>
+            <td>{{ invoice.documentDate | date('d M Y') }}</td>
+            <td class="text-nowrap"><a href="{{ path('app_invoice_show', {'uuid': invoice.uuid}) }}">{{ invoice.documentNumber }}</a></td>
+            <td>{{ invoice.referenceNumber }}</td>
+            <td><a href="{{ path('app_contact_show', {'uuid' : invoice.customer.uuid}) }}">{{ invoice.customer.displayName }}</a></td>
+            <td>{{ invoice.amount | number_format(2,'.') }}</td>
+            <td id="invoice-pending-{{ invoice.uuid }}">{{ invoice.pendingAmount | number_format(2,'.') }}</td>
+            <td id="invoice-status-{{ invoice.uuid }}">
+                {% set status = invoice.invoiceStatus %}
+                <span class="badge text-uppercase badge-{% if status == 'Paid' %}success{% elseif status == 'Unpaid' %}danger{% else %}warning{% endif %}">{{ status }}</span>
+            </td>
+            <td class="text-center">
+                <a class="btn btn-sm btn-link text-gray-500" id="actionsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-ellipsis-v"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right animated--fade-in shadow" aria-labelledby="actionsDropdown">
+                    <a class="dropdown-item" href="#" >
+                        <i class="fas fa-paper-plane fa-sm fa-fw mr-2 text-gray-500"></i>
+                        Send
+                    </a>
+                    {% if invoice.invoiceStatus != 'Paid' %}
+                        <a class="dropdown-item" href="{{ path('app_invoice_payment', {'uuid' : invoice.uuid}) }}" data-toggle="modal" data-target="#turboModal">
+                            <i class="fas fa-dollar-sign fa-sm fa-fw mr-2 text-gray-500"></i>
+                            Make Payment
+                        </a>
+                    {% else %}
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-print fa-sm fa-fw mr-2 text-gray-500"></i>
+                            Print
+                        </a>
+                    {% endif %}
+                    {% if invoice.invoiceStatus == 'Unpaid' %}
+                    <a class="dropdown-item" href="{{ path('app_invoice_edit', {'uuid' : invoice.uuid}) }}">
+                        <i class="fas fa-pen fa-sm fa-fw mr-2 text-gray-500"></i>
+                        Edit
+                    </a>
+                    <a class="dropdown-item text-danger delete-item" href="#" data-action="{{ path('app_invoice_delete', {'uuid' : invoice.uuid}) }}" data-token="{{ csrf_token('delete' ~ invoice.uuid) }}" data-toggle="modal" data-target="#deleteModal">
+                        <i class="fas fa-trash fa-sm fa-fw mr-2"></i>
+                        Delete
+                    </a>
+                    {% endif %}
+                </div>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="7">No Records Found</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

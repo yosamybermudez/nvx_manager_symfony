@@ -1,0 +1,75 @@
+<turbo-stream action="replace" target="turboModalContent">
+    <template>
+
+        <div class="modal-content" id="turboModalContent">
+            {{ form_start(form) }}
+            <div class="modal-header">
+                <h5 class="modal-title" id="newPaymentModalLabel">Make Payment</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row mb-3">
+                    <div class="col-md-4 align-self-center font-weight-bold">Invoice Number</div>
+                    <div class="col-md-8 align-self-center">{{ invoice.documentNumber }}</div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-4 align-self-center font-weight-bold">Invoice Date</div>
+                    <div class="col-md-8 align-self-center">{{ invoice.documentDate | date('d M y') }}</div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-4 align-self-center font-weight-bold">Description</div>
+                    <div class="col-md-8 align-self-center">{{ invoice.notes }}</div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-4 align-self-center font-weight-bold">Customer</div>
+                    <div class="col-md-8 align-self-center">{{ invoice.customer.displayName }}</div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-4 align-self-center font-weight-bold">Total Amount</div>
+                    <div class="col-md-8 align-self-center">{{ invoice.pendingAmount | number_format(2,'.') }}</div>
+                </div>
+                <hr class="sidebar-divider">
+                <!-- Row -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row mb-2">
+                            <div class="col-md-5 align-self-center">{{ form_label(form.transactionDate) }}</div>
+                            <div class="col-md-7">{{ form_widget(form.transactionDate) }}</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row mb-2">
+                            <div class="col-md-5 align-self-center">{{ form_label(form.amount) }}</div>
+                            <div class="col-md-7">{{ form_widget(form.amount) }}</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Row -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row mb-2">
+                            <div class="col-md-5 align-self-center">{{ form_label(form.paymentMethod) }}</div>
+                            <div class="col-md-7">{{ form_widget(form.paymentMethod) }}</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row mb-2">
+                            <div class="col-md-5 align-self-center">{{ form_label(form.contableAccount) }}</div>
+                            <div class="col-md-7">{{ form_widget(form.contableAccount) }}</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Row -->
+                <div class="row">
+                    <div class="col-md-12">
+                        {{ form_row(form.notes) }}
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-dollar-sign" data-dismiss="modal"></i> Make Payment</button>
+                <button class="btn btn-secondary btn-sm" type="button" data-dismiss="modal">Cancel</button>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </template>
+</turbo-stream>

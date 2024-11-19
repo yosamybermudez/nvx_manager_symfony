@@ -1,0 +1,44 @@
+<table class="table table-sm data-table-item">
+    <thead>
+    <tr>
+        <th>Service</th>
+        <th>Item Name</th>
+        <th>Description</th>
+        <th>Unit</th>
+        <th>Type</th>
+        <th>Price</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in items %}
+        <tr>
+            <td class="text-nowrap"><a href="{{ path('app_service_show', {'uuid': item.service.uuid}) }}">{{ item.service.name }}</a></td>
+            <td class="text-nowrap"><a href="{{ path('app_item_show', {'uuid': item.uuid}) }}">{{ item.name }}</a></td>
+            <td>{{ item.description }}</td>
+            <td>{{ item.unit }}</td>
+            <td>{{ item.type }}</td>
+            <td>{{ item.regularPrice | number_format(2,'.') }}</td>
+            <td class="text-center">
+                <a class="btn btn-sm btn-link text-gray-500" id="actionsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-ellipsis-v"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right animated--fade-in shadow" aria-labelledby="actionsDropdown">
+                    <a class="dropdown-item" href="{{ path('app_item_edit', {'uuid' : item.uuid}) }}">
+                        <i class="fas fa-pen fa-sm fa-fw mr-2 text-gray-500"></i>
+                        Edit
+                    </a>
+                    <a class="dropdown-item text-danger delete-item" href="#" data-action="{{ path('app_item_delete', {'uuid' : item.uuid}) }}" data-token="{{ csrf_token('delete' ~ item.uuid) }}" data-toggle="modal" data-target="#deleteModal">
+                        <i class="fas fa-trash fa-sm fa-fw mr-2"></i>
+                        Delete
+                    </a>
+                </div>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="3">No Records Found</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

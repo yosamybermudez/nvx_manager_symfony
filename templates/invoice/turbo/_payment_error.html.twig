@@ -1,0 +1,26 @@
+<turbo-stream action="replace" target="turboModalContent">
+    <template>
+        <div class="modal-content" id="turboModalContent">
+            <div class="modal-header">
+                <h5 class="modal-title" id="newPaymentModalLabel">Payment Error</h5>
+            </div>
+            <div class="modal-body">
+                An Error Has Ocurred
+                <hr class="sidebar-divider">
+                {{ message }}
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button class="btn btn-primary btn-sm" type="button" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </template>
+</turbo-stream>
+
+<turbo-stream action="replace" target="invoice-status-{{ invoice.uuid }}">
+    <template>
+        <td id="invoice-status-{{ invoice.uuid }}">
+            {% set status = 'Paid' %}
+            <span class="badge text-uppercase badge-{% if status == 'Paid' %}success{% else %}danger{% endif %}">{{ status }}</span>
+        </td>
+    </template>
+</turbo-stream>

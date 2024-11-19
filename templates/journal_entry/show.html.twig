@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}JournalEntry{% endblock %}
+
+{% block body %}
+    <h1>JournalEntry</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ journal_entry.id }}</td>
+            </tr>
+            <tr>
+                <th>Uuid</th>
+                <td>{{ journal_entry.uuid }}</td>
+            </tr>
+            <tr>
+                <th>EntryDate</th>
+                <td>{{ journal_entry.entryDate ? journal_entry.entryDate|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ journal_entry.description }}</td>
+            </tr>
+            <tr>
+                <th>Currency</th>
+                <td>{{ journal_entry.currency }}</td>
+            </tr>
+            <tr>
+                <th>Debit</th>
+                <td>{{ journal_entry.debit }}</td>
+            </tr>
+            <tr>
+                <th>Credit</th>
+                <td>{{ journal_entry.credit }}</td>
+            </tr>
+            <tr>
+                <th>Balance</th>
+                <td>{{ journal_entry.balance }}</td>
+            </tr>
+            <tr>
+                <th>PaymentMethod</th>
+                <td>{{ journal_entry.paymentMethod }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ journal_entry.createdAt ? journal_entry.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ journal_entry.updatedAt ? journal_entry.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_journal_entry_index') }}">back to list</a>
+
+    <a href="{{ path('app_journal_entry_edit', {'id': journal_entry.id}) }}">edit</a>
+
+    {{ include('journal_entry/_delete_form.html.twig') }}
+{% endblock %}

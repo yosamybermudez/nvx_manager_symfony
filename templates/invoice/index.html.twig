@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Invoices{% endblock %}
+
+{% block body %}
+    <div class="card card-borderless">
+        <!-- Page Header -->
+        <div class="card-header pt-4 pb-3 d-flex justify-content-between">
+            <h5 class="align-self-center m-0">All Invoices</h5>
+            <div class="dropdown">
+                <a class="btn btn-sm btn-primary" href="{{ path('app_invoice_new') }}">Create new</a>
+                <a class="btn btn-sm btn-secondary" href="#" id="actionsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-ellipsis-v"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right animated--fade-in shadow" aria-labelledby="actionsDropdown">
+                    <a class="dropdown-item" href="#">
+                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Profile
+                    </a>
+                    <a class="dropdown-item" href="#">
+                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Settings
+                    </a>
+                    <a class="dropdown-item" href="#">
+                        <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Activity Log
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- Page Content -->
+        <div class="card-body">
+            {% set vars = {
+                'full' : true
+            } %}
+            {% include 'invoice/_table.html.twig' with vars %}
+        </div>
+    </div>
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form id="delete-form" method="post">
+                    <input type="hidden" name="_token">
+                    <div class="modal-header">
+                        <h5 class="modal-title mx-auto" id="deleteModalLabel">Do you really want to delete this element?</h5>
+                    </div>
+                    <div class="modal-body text-center">
+                        Clicking 'Yes, delete it!' will permanently remove the element.
+                        <div class="mt-3 px-5">
+                            <label for="confirm-delete" class="required font-italic">Type 'delete' proceed.</label>
+                            <input autocomplete="off" type="text" id="confirm-delete" name="confirm_delete" required="required" placeholder="Type 'delete' proceed" class="form-control form-control-sm mb-2">
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-check"></i> Yes, delete it!</button>
+                        <button class="btn btn-secondary btn-sm" type="button" data-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="turboModal" tabindex="-1" role="dialog" aria-labelledby="turboModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content" id="turboModalContent">
+                <div class="modal-body">
+                    <p class="text-center mb-3">Processing</p>
+                    <p class="text-center mb-0"><i class="fas fa-2x fa-spin fa-spinner mx-auto"></i></p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Contact{% endblock %}
+
+{% block body %}
+    <!-- Page Header -->
+    <div class="d-flex justify-content-between bg-white border-bottom border-1 p-3">
+        <h5 class="align-self-center mb-0">Edit Contact</h5>
+        <div class="d-flex justify-content-between gap-2">
+            {% set vars = {
+                'action' : path('app_contact_delete', {'uuid': contact.uuid}),
+                'token_id' : contact.uuid
+            } %}
+            {% include '_includes/_delete_form.html.twig' with vars  %}
+            <a class="btn btn-sm btn-secondary" href="{{ path('app_contact_index') }}">Back To List</a>
+        </div>
+    </div>
+    <!-- Page Content -->
+    <div class="p-3">
+        {{ include('contact/_form.html.twig') }}
+    </div>
+{% endblock %}

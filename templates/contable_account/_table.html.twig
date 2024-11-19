@@ -1,0 +1,32 @@
+<table class="table table-sm table-striped data-table">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Current Amount</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for contable_account in contable_accounts %}
+        <tr>
+            <td>
+                {{ contable_account.name }}
+                {% if contable_account.principal %}
+                    <span class="badge badge-primary">Principal</span>
+                {% endif %}
+            </td>
+            <td>{{ contable_account.description }}</td>
+            <td>$ {{ contable_account.amount | number_format(2,'.') }}</td>
+            <td>
+                <a href="{{ path('app_contable_account_show', {'id': contable_account.id}) }}">show</a>
+                <a href="{{ path('app_contable_account_edit', {'id': contable_account.id}) }}">edit</a>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="4">no records found</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

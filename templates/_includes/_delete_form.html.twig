@@ -1,0 +1,27 @@
+<form method="post" action="{{ action }}">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ token_id) }}">
+    <a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal">
+        <i class="fas fa-trash fa-sm fa-fw mr-2"></i>
+        Delete
+    </a>
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title mx-auto" id="deleteModalLabel">Do you really want to delete this element?</h5>
+                </div>
+                <div class="modal-body text-center">
+                    Clicking 'Yes, delete it!' will permanently remove the element.
+                    <div class="mt-3 px-5">
+                        <label for="confirm-delete" class="required font-italic">Type 'delete' proceed.</label>
+                        <input autocomplete="off" type="text" id="confirm-delete" name="confirm_delete" required="required" placeholder="Type 'delete' proceed" class="form-control form-control-sm mb-2">
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-check"></i> Yes, delete it!</button>
+                    <button class="btn btn-secondary btn-sm" type="button" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

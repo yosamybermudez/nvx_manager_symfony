@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New TransactionCategory{% endblock %}
+
+{% block body %}
+    <h1>Create new TransactionCategory</h1>
+
+    {{ include('transaction_category/_form.html.twig') }}
+
+    <a href="{{ path('app_transaction_category_index') }}">back to list</a>
+{% endblock %}
